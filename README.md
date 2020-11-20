@@ -1,2 +1,2 @@
-# coursera-test
-Test repo for coursera.
+# Single Page Web Applications with AngularJS
+by Johns Hopkins University
