@@ -5,6 +5,8 @@
 angular.module('NameCalculator', [])
 .controller('NameCalculatorController', NameCalculatorController);
 
+
+NameCalculatorController.$inject = ['$scope', '$filter', '$injector']; //Protecting Dependency Injection from Minification
 function NameCalculatorController ($scope,
                                    $filter,
                                    $injector) {  //where the magic happens :D on Dependency Injections
@@ -34,7 +36,7 @@ function NameCalculatorController ($scope,
     return totalStringValue
   };
 
-//This shows the dependency Injections by mapping the method variables $scope, $filter & $injector to the services 
+//This shows the dependency Injections by mapping the method variables $scope, $filter & $injector to the services
   console.log($injector.annotate(NameCalculatorController));
 
 }
