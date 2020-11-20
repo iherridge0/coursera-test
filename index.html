@@ -11,7 +11,8 @@
     <div ng-controller="NameCalculatorController">
       <input type="text"
              ng-model="name"
-             ng-keyup="displayNumeric();">
+             ng-keyup="displayNumeric();"
+             ng-blur="lower(); displayNumeric();">
       Inside my input is: {{totalValue}}
     </div>
   </body>
