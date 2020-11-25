@@ -4,14 +4,16 @@
 
 angular.module('NameCalculator', [])
 .controller('NameCalculatorController', NameCalculatorController)
-.filter('message', MessageFilter);
+.filter('message', MessageFilter)
+.filter('replace', ReplaceFilter);
 
 
-NameCalculatorController.$inject = ['$scope', '$filter', '$injector', 'messageFilter']; //Protecting Dependency Injection from Minification
+NameCalculatorController.$inject = ['$scope', '$filter', '$injector', 'messageFilter', 'replaceFilter']; //Protecting Dependency Injection from Minification
 function NameCalculatorController ($scope,
                                    $filter,
                                    $injector,
-                                   messageFilter) {  //where the magic happens :D on Dependency Injections
+                                   messageFilter,
+                                   replaceFilter) {  //where the magic happens :D on Dependency Injections
   $scope.name = "";
   $scope.totalValue = 0;
   $scope.message = "Irwin Herridge";
@@ -54,6 +56,14 @@ function MessageFilter(){
   return function (input) {
     input = input || "";
     input = input.replace("Irwin", "I.");
+    return input;
+  };
+}
+
+function ReplaceFilter(){
+  return function (input, from, to) {
+    input = input || "";
+    input = input.replace(from, to);
     return input;
   };
 }
