@@ -3,15 +3,24 @@
 
 
 angular.module('NameCalculator', [])
-.controller('NameCalculatorController', NameCalculatorController);
+.controller('NameCalculatorController', NameCalculatorController)
+.filter('message', MessageFilter);
 
 
-NameCalculatorController.$inject = ['$scope', '$filter', '$injector']; //Protecting Dependency Injection from Minification
+NameCalculatorController.$inject = ['$scope', '$filter', '$injector', 'messageFilter']; //Protecting Dependency Injection from Minification
 function NameCalculatorController ($scope,
                                    $filter,
-                                   $injector) {  //where the magic happens :D on Dependency Injections
+                                   $injector,
+                                   messageFilter) {  //where the magic happens :D on Dependency Injections
   $scope.name = "";
   $scope.totalValue = 0;
+  $scope.message = "Irwin Herridge";
+
+  $scope.replacedmessage = function (){
+    var msg = $scope.message;
+    msg = messageFilter(msg);
+    return msg;
+  }
 
   $scope.displayNumeric = function () {
     var totalNameValue = calculateNumericForString($scope.name); // get the total totalValue
@@ -39,6 +48,14 @@ function NameCalculatorController ($scope,
 //This shows the dependency Injections by mapping the method variables $scope, $filter & $injector to the services
   console.log($injector.annotate(NameCalculatorController));
 
+}
+
+function MessageFilter(){
+  return function (input) {
+    input = input || "";
+    input = input.replace("Irwin", "I.");
+    return input;
+  };
 }
 
 })();
